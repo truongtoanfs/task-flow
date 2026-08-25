@@ -1,75 +1,59 @@
-# Nuxt Minimal Starter
+# TaskFlow
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+TaskFlow là dashboard quản lý dự án và công việc nội bộ.
 
-## Setup
+Dự án được xây dựng để thực hành phát triển một ứng dụng full-stack từ giao diện, API đến cơ sở dữ liệu trong cùng một Nuxt application.
 
-Make sure to install dependencies:
+## Trạng thái hiện tại
 
-```bash
-# npm
-npm install
+Đã hoàn thành:
 
-# pnpm
-pnpm install
+- Khởi tạo Nuxt 4.
+- Cấu hình giao diện chạy CSR bằng `ssr: false`.
+- Cấu hình pnpm và lockfile.
+- Tạo `PROJECT_CONTEXT.md`.
+- Kiểm tra cài đặt, build và development server.
 
-# yarn
-yarn install
+Chưa thực hiện:
 
-# bun
-bun install
-```
+- Phân tích đầy đủ business rule.
+- Thiết kế ERD và cơ sở dữ liệu.
+- PostgreSQL và Docker Compose.
+- Drizzle ORM và Zod.
+- API.
+- Đăng nhập và phân quyền.
+- Test.
 
-## Development Server
+Xem trạng thái và quy tắc dự án tại [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md).
 
-Start the development server on `http://localhost:3000`:
+## Công nghệ hiện tại
 
-```bash
-# npm
-npm run dev
+- Nuxt 4
+- Vue 3
+- TypeScript
+- Nitro/H3
+- pnpm
+- CSR với `ssr: false`
 
-# pnpm
-pnpm dev
+Các công nghệ dự kiến nhưng chưa cài đặt:
 
-# yarn
-yarn dev
+- PostgreSQL
+- Drizzle ORM
+- Zod
+- Element Plus hoặc BFC UI
 
-# bun
-bun run dev
-```
+## Yêu cầu môi trường
 
-## Production
+- Node.js từ phiên bản 22.19.0
+- pnpm theo phiên bản được khai báo trong `package.json`
+- Git
 
-Build the application for production:
+Docker sẽ được yêu cầu từ giai đoạn PostgreSQL.
 
-```bash
-# npm
-npm run build
+## Cài đặt
 
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
+Clone repository:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+git clone https://github.com/truongtoanfs/task-flow.git
+cd task-flow

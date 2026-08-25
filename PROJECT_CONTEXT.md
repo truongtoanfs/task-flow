@@ -153,3 +153,25 @@ Một thay đổi chỉ được xem là hoàn thành khi:
 - Không phá vỡ kiến trúc đã thống nhất.
 - Tài liệu liên quan được cập nhật.
 - Có bằng chứng về lệnh kiểm tra đã chạy.
+
+## 12. Bằng chứng kiểm tra Buổi 1
+
+Ngày kiểm tra: 2026-08-25
+
+Môi trường:
+
+- Node.js: `22.23.2`
+- pnpm: `11.23.0`
+
+Các lệnh đã chạy:
+
+- `pnpm install --frozen-lockfile`: thành công
+- `pnpm build`: thành công
+- `pnpm dev`: ứng dụng chạy tại `http://localhost:3000`
+
+Các nội dung đã xác nhận:
+
+- Giao diện chạy CSR với `ssr: false`.
+- Nitro development server vẫn hoạt động.
+- Không có secret trong repository.
+- README chỉ hướng dẫn sử dụng pnpm.
