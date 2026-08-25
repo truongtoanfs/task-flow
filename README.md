@@ -13,10 +13,12 @@ Dự án được xây dựng để thực hành phát triển một ứng dụn
 - Cấu hình pnpm và lockfile.
 - Tạo `PROJECT_CONTEXT.md`.
 - Kiểm tra cài đặt, build và development server.
+- Phân tích phạm vi MVP và business rule.
+
+Xem đặc tả MVP tại [docs/spec.md](./docs/spec.md).
 
 Chưa thực hiện:
 
-- Phân tích đầy đủ business rule.
 - Thiết kế ERD và cơ sở dữ liệu.
 - PostgreSQL và Docker Compose.
 - Drizzle ORM và Zod.
