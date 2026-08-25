@@ -1,75 +1,129 @@
-# Nuxt Minimal Starter
+# TaskFlow
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+TaskFlow là dashboard quản lý dự án và công việc nội bộ.
 
-## Setup
+Dự án được xây dựng để thực hành phát triển một ứng dụng full-stack từ giao diện, API đến cơ sở dữ liệu trong cùng một Nuxt application.
 
-Make sure to install dependencies:
+## Trạng thái hiện tại
+
+Đã hoàn thành:
+
+- Khởi tạo Nuxt 4.
+- Cấu hình giao diện chạy CSR bằng `ssr: false`.
+- Cấu hình pnpm và lockfile.
+- Tạo `PROJECT_CONTEXT.md`.
+- Kiểm tra cài đặt, build và development server.
+
+Chưa thực hiện:
+
+- Phân tích đầy đủ business rule.
+- Thiết kế ERD và cơ sở dữ liệu.
+- PostgreSQL và Docker Compose.
+- Drizzle ORM và Zod.
+- API.
+- Đăng nhập và phân quyền.
+- Test.
+
+Xem trạng thái và quy tắc dự án tại [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md).
+
+## Công nghệ hiện tại
+
+- Nuxt 4
+- Vue 3
+- TypeScript
+- Nitro/H3
+- pnpm
+- CSR với `ssr: false`
+
+Các công nghệ dự kiến nhưng chưa cài đặt:
+
+- PostgreSQL
+- Drizzle ORM
+- Zod
+- Element Plus hoặc BFC UI
+
+## Yêu cầu môi trường
+
+- Node.js từ phiên bản 22.19.0
+- pnpm theo phiên bản được khai báo trong `package.json`
+- Git
+
+Docker sẽ được yêu cầu từ giai đoạn PostgreSQL.
+
+## Cài đặt
+
+Clone repository:
 
 ```bash
-# npm
-npm install
+git clone https://github.com/truongtoanfs/task-flow.git
+cd task-flow
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+Cài dependency đúng theo lockfile:
 
 ```bash
-# npm
-npm run dev
+pnpm install --frozen-lockfile
+```
 
-# pnpm
+## Chạy development server
+
+```bash
 pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+Mở ứng dụng tại:
 
-Build the application for production:
+```text
+http://localhost:3000
+```
+
+## Build production
 
 ```bash
-# npm
-npm run build
-
-# pnpm
 pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+Chạy thử bản production:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
 pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Kiến trúc dự kiến
+
+```text
+UI
+→ API handler
+→ service
+→ repository
+→ PostgreSQL
+```
+
+Trách nhiệm:
+
+- `app/`: giao diện và tương tác người dùng.
+- `server/api/`: HTTP request và HTTP response.
+- `server/services/`: business rule, quyền và transaction.
+- `server/repositories/`: truy vấn dữ liệu.
+- `server/database/`: kết nối, schema và migration.
+
+Các thư mục server sẽ được tạo khi dự án triển khai đến đúng giai đoạn.
+
+## Quy tắc phát triển
+
+- Chỉ sử dụng pnpm.
+- Không commit `.env`.
+- Không đặt secret trong `runtimeConfig.public`.
+- Không truy cập database từ code client.
+- Validate dữ liệu người dùng phía server.
+- Thay đổi database phải đi qua migration.
+- Không tuyên bố hoàn thành nếu chưa chạy lệnh kiểm tra.
+
+## Lộ trình gần nhất
+
+1. Hoàn thành thiết lập repository.
+2. Viết đặc tả MVP và business rule.
+3. Thiết kế ERD.
+4. Viết từ điển dữ liệu.
+5. Dựng PostgreSQL bằng Docker Compose.
