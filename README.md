@@ -57,3 +57,73 @@ Clone repository:
 ```bash
 git clone https://github.com/truongtoanfs/task-flow.git
 cd task-flow
+
+```
+
+Cài dependency đúng theo lockfile:
+
+```bash
+pnpm install --frozen-lockfile
+```
+
+## Chạy development server
+
+```bash
+pnpm dev
+```
+
+Mở ứng dụng tại:
+
+```text
+http://localhost:3000
+```
+
+## Build production
+
+```bash
+pnpm build
+```
+
+Chạy thử bản production:
+
+```bash
+pnpm preview
+```
+
+## Kiến trúc dự kiến
+
+```text
+UI
+→ API handler
+→ service
+→ repository
+→ PostgreSQL
+```
+
+Trách nhiệm:
+
+- `app/`: giao diện và tương tác người dùng.
+- `server/api/`: HTTP request và HTTP response.
+- `server/services/`: business rule, quyền và transaction.
+- `server/repositories/`: truy vấn dữ liệu.
+- `server/database/`: kết nối, schema và migration.
+
+Các thư mục server sẽ được tạo khi dự án triển khai đến đúng giai đoạn.
+
+## Quy tắc phát triển
+
+- Chỉ sử dụng pnpm.
+- Không commit `.env`.
+- Không đặt secret trong `runtimeConfig.public`.
+- Không truy cập database từ code client.
+- Validate dữ liệu người dùng phía server.
+- Thay đổi database phải đi qua migration.
+- Không tuyên bố hoàn thành nếu chưa chạy lệnh kiểm tra.
+
+## Lộ trình gần nhất
+
+1. Hoàn thành thiết lập repository.
+2. Viết đặc tả MVP và business rule.
+3. Thiết kế ERD.
+4. Viết từ điển dữ liệu.
+5. Dựng PostgreSQL bằng Docker Compose.
