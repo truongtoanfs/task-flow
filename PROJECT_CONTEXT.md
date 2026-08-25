@@ -14,10 +14,12 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 - Cấu hình giao diện chạy CSR bằng `ssr: false`.
 - Cấu hình pnpm chỉ cho phép `esbuild` chạy build script.
 - Kiểm tra ứng dụng chạy tại `http://localhost:3000`.
+- Đã xác định phạm vi MVP.
+- Đã xác định actor và vai trò `owner`, `member`, `viewer`.
+- Đã viết business rule và acceptance criteria tại `docs/spec.md`.
 
 Chưa thực hiện:
 
-- Chưa phân tích đầy đủ business rule.
 - Chưa thiết kế cơ sở dữ liệu.
 - Chưa cài Drizzle ORM và Zod.
 - Chưa tạo PostgreSQL bằng Docker Compose.
@@ -131,15 +133,12 @@ Không ghi một lệnh vào tài liệu nếu lệnh đó chưa tồn tại ho�
 
 Những nội dung sau phải được phân tích trước khi triển khai:
 
-- Actor và vai trò người dùng.
-- Business rule.
-- Acceptance criteria.
 - Danh sách entity.
 - Quan hệ giữa các entity.
 - API contract.
-- Quy tắc phân quyền.
-- Quy tắc xóa dữ liệu.
-- Cách xử lý cập nhật đồng thời.
+- Kiểu khóa chính.
+- Index.
+- Authentication provider.
 
 Nếu thiếu thông tin, phải đặt câu hỏi thay vì tự giả định.
 
@@ -175,3 +174,27 @@ Các nội dung đã xác nhận:
 - Nitro development server vẫn hoạt động.
 - Không có secret trong repository.
 - README chỉ hướng dẫn sử dụng pnpm.
+
+## 13. Bằng chứng kiểm tra Buổi 2
+
+Ngày kiểm tra: 2026-08-25
+
+Tài liệu:
+
+- `docs/spec.md`
+
+Đã xác nhận:
+
+- Phạm vi MVP và ngoài phạm vi.
+- Actor và vai trò.
+- Ma trận phân quyền.
+- Business rule `BR-01` đến `BR-13`.
+- Acceptance criteria `AC-01` đến `AC-10`.
+- Quy tắc xóa dữ liệu và cập nhật đồng thời.
+
+Chưa thực hiện:
+
+- Thiết kế ERD.
+- Từ điển dữ liệu.
+- Schema và migration.
+- API implementation.
