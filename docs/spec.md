@@ -2,8 +2,8 @@
 
 ## 1. Trạng thái tài liệu
 
-- Trạng thái: Draft
-- Phiên bản: 0.1
+- Trạng thái: Ready for ERD
+- Phiên bản: 1.0
 - Ngày tạo: 2026-08-25
 - Phạm vi: MVP
 - Người chịu trách nhiệm: Trương Văn Toàn
@@ -152,6 +152,7 @@ Viewer không được:
 ## 8. Ma trận phân quyền
 
 | Hành động              | Owner | Member | Viewer |
+|---|:---:|:---:|:---:|
 | Xem project            | Có    | Có     | Có     |
 | Cập nhật project       | Có    | Không  | Không  |
 | Xem thành viên         | Có    | Có     | Có     |
@@ -192,7 +193,7 @@ Chỉ owner của project được:
 - Xóa thành viên.
 - Thay đổi vai trò của thành viên.
 
-Owner chỉ có thể quản lý thành viên trong project mà họ sở hữu.
+Owner chỉ có thể quản lý thành viên trong project mà họ có vai trò owner.
 
 ### BR-05 — Quyền của member
 
@@ -280,6 +281,20 @@ MVP chưa hỗ trợ xóa project hoặc task.
 
 Không tự triển khai hard delete hoặc soft delete khi chưa có đặc tả bổ sung.
 
+### BR-14 — Membership duy nhất
+
+Mỗi user chỉ được có một membership trong mỗi project.
+
+Không được thêm lại user đã là thành viên của project.
+
+Mỗi membership chỉ có một role tại một thời điểm:
+
+- `owner`
+- `member`
+- `viewer`
+
+Nếu muốn thay đổi quyền, owner phải cập nhật role của membership hiện tại thay vì tạo membership mới.
+
 ## 10. Quy ước lỗi
 
 | Tình huống | Kết quả mong đợi |
@@ -296,78 +311,88 @@ Tên error code chi tiết sẽ được chốt khi thiết kế API contract.
 
 ### AC-01 — Khách truy cập project
 
-Given người dùng chưa đăng nhập  
-When người dùng yêu cầu xem một project  
-Then hệ thống trả về `401 Unauthorized`  
+Given người dùng chưa đăng nhập
+When người dùng yêu cầu xem một project
+Then hệ thống trả về `401 Unauthorized`
 And không trả về dữ liệu project
 
 ### AC-02 — Tạo project
 
-Given người dùng đã đăng nhập  
-When người dùng tạo project với dữ liệu hợp lệ  
-Then project được tạo  
-And người tạo trở thành owner  
-And activity log tạo project được ghi  
+Given người dùng đã đăng nhập
+When người dùng tạo project với dữ liệu hợp lệ
+Then project được tạo
+And người tạo trở thành owner
+And activity log tạo project được ghi
 And các thao tác được thực hiện toàn vẹn
 
 ### AC-03 — Viewer tạo task
 
-Given người dùng là viewer của project  
-When người dùng gửi yêu cầu tạo task  
-Then hệ thống trả về `403 Forbidden`  
-And không có task nào được tạo  
+Given người dùng là viewer của project
+When người dùng gửi yêu cầu tạo task
+Then hệ thống trả về `403 Forbidden`
+And không có task nào được tạo
 And không có activity log sai được tạo
 
 ### AC-04 — Member tạo task
 
-Given người dùng là member của project  
-When người dùng tạo task với dữ liệu hợp lệ  
-Then task được tạo  
-And task thuộc đúng project  
+Given người dùng là member của project
+When người dùng tạo task với dữ liệu hợp lệ
+Then task được tạo
+And task thuộc đúng project
 And activity log được ghi
 
 ### AC-05 — Gán user ngoài project
 
-Given user X không phải thành viên của project A  
-When owner hoặc member gán task của project A cho X  
-Then hệ thống trả về `409 Conflict`  
+Given user X không phải thành viên của project A
+When owner hoặc member gán task của project A cho X
+Then hệ thống trả về `409 Conflict`
 And không tạo task assignee
 
 ### AC-06 — Gán trùng assignee
 
-Given user X đã được gán vào task T  
-When hệ thống nhận yêu cầu gán X vào T lần nữa  
-Then hệ thống từ chối yêu cầu  
+Given user X đã được gán vào task T
+When hệ thống nhận yêu cầu gán X vào T lần nữa
+Then hệ thống trả về `409 Conflict`
 And chỉ tồn tại một assignment của X với T
 
 ### AC-07 — Xóa owner cuối cùng
 
-Given project chỉ còn một owner  
-When owner đó bị xóa hoặc bị đổi sang role khác  
-Then hệ thống trả về `409 Conflict`  
+Given project chỉ còn một owner
+When owner đó bị xóa hoặc bị đổi sang role khác
+Then hệ thống trả về `409 Conflict`
 And project vẫn giữ owner hiện tại
 
 ### AC-08 — Xóa thành viên đang có task
 
-Given member M đang được gán vào một task chưa hoàn thành  
-When owner yêu cầu xóa M khỏi project  
-Then hệ thống trả về `409 Conflict`  
+Given member M đang được gán vào một task chưa hoàn thành
+When owner yêu cầu xóa M khỏi project
+Then hệ thống trả về `409 Conflict`
 And membership và assignment không thay đổi
 
 ### AC-09 — Status không hợp lệ
 
-Given người dùng có quyền cập nhật task  
-When người dùng gửi status không nằm trong danh sách cho phép  
-Then hệ thống trả về `422 Unprocessable Entity`  
+Given người dùng có quyền cập nhật task
+When người dùng gửi status không nằm trong danh sách cho phép
+Then hệ thống trả về `422 Unprocessable Entity`
 And task không thay đổi
 
 ### AC-10 — Cập nhật đồng thời
 
-Given hai người cùng đọc task ở version 1  
-When người thứ nhất cập nhật thành công  
-And người thứ hai gửi cập nhật với version 1  
-Then request thứ hai trả về `409 Conflict`  
+Given hai người cùng đọc task ở version 1
+When người thứ nhất cập nhật thành công
+And người thứ hai gửi cập nhật với version 1
+Then request thứ hai trả về `409 Conflict`
 And dữ liệu của người thứ nhất không bị ghi đè
+
+### AC-11 — Thêm thành viên trùng
+
+```gherkin
+Given user X đã là thành viên của project A
+When owner thêm X vào project A lần nữa
+Then hệ thống trả về 409 Conflict
+And không tạo membership mới
+And role hiện tại của X không thay đổi
+```
 
 ## 12. Các quyết định đã chốt
 

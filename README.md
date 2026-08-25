@@ -14,7 +14,9 @@ Dự án được xây dựng để thực hành phát triển một ứng dụn
 - Tạo `PROJECT_CONTEXT.md`.
 - Kiểm tra cài đặt, build và development server.
 - Phân tích phạm vi MVP và business rule.
+
 Xem đặc tả MVP tại [docs/spec.md](./docs/spec.md).
+
 Chưa thực hiện:
 
 - Thiết kế ERD và cơ sở dữ liệu.

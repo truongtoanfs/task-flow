@@ -188,8 +188,8 @@ Tài liệu:
 - Phạm vi MVP và ngoài phạm vi.
 - Actor và vai trò.
 - Ma trận phân quyền.
-- Business rule `BR-01` đến `BR-13`.
-- Acceptance criteria `AC-01` đến `AC-10`.
+- Business rule `BR-01` đến `BR-14`.
+- Acceptance criteria `AC-01` đến `AC-11`.
 - Quy tắc xóa dữ liệu và cập nhật đồng thời.
 
 Chưa thực hiện:
