@@ -207,7 +207,7 @@ Chưa thực hiện:
 
 ## 14. Bằng chứng kiểm tra Buổi 3
 
-Ngày kiểm tra: 2026-08-25
+Ngày kiểm tra: 2026-08-26
 
 Tài liệu:
 

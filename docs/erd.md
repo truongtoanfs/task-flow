@@ -3,8 +3,9 @@
 ## 1. Trạng thái tài liệu
 
 - Trạng thái: Draft
-- Phiên bản: 0.1
+- Phiên bản: 1.0
 - Ngày tạo: 2026-08-25
+- Ngày cập nhật: 2026-08-26
 - Nguồn nghiệp vụ: [spec.md](./spec.md)
 
 ## 2. Mục tiêu
@@ -93,20 +94,21 @@ erDiagram
         datetime created_at
     }
 
-    USERS ||--o{ PROJECTS : creates
+    USERS ||..o{ PROJECTS : creates
     USERS ||--o{ PROJECT_MEMBERS : joins
     PROJECTS ||--|{ PROJECT_MEMBERS : has
 
-    PROJECTS ||--o{ TASKS : contains
-    USERS ||--o{ TASKS : creates
+    PROJECTS ||..o{ TASKS : contains
+    USERS ||..o{ TASKS : creates
 
     TASKS ||--o{ TASK_ASSIGNEES : has
     PROJECT_MEMBERS ||--o{ TASK_ASSIGNEES : receives
+    USERS ||..o{ TASK_ASSIGNEES : assigns
 
-    PROJECTS ||--o{ ACTIVITY_LOGS : records
-    USERS ||--o{ ACTIVITY_LOGS : performs
-    TASKS o|--o{ ACTIVITY_LOGS : referenced_by
-    USERS o|--o{ ACTIVITY_LOGS : targeted_by
+    PROJECTS ||..o{ ACTIVITY_LOGS : records
+    USERS ||..o{ ACTIVITY_LOGS : performs
+    TASKS o|..o{ ACTIVITY_LOGS : referenced_by
+    USERS o|..o{ ACTIVITY_LOGS : targeted_by
 ```
 
 ## 5. Cardinality và optionality
@@ -302,14 +304,14 @@ Buổi 4 chưa quyết định index tối ưu hiệu năng; index theo truy v�
 
 ## 11. Checklist review ERD
 
-- [ ] Mỗi entity có một mục đích rõ ràng.
-- [ ] Không có entity ngoài MVP.
-- [ ] Mọi quan hệ N–N đều có entity trung gian.
-- [ ] Mỗi quan hệ có cardinality.
-- [ ] Mỗi quan hệ có optionality.
-- [ ] Một task thuộc chính xác một project.
-- [ ] Một user chỉ có một membership trong mỗi project.
-- [ ] Assignee phải thuộc cùng project với task.
-- [ ] Các FK ghép dự kiến đã được giải thích.
-- [ ] Rule không thể bảo vệ bằng DB đã được ghi rõ.
-- [ ] ERD không chốt sớm index hoặc `ON DELETE`.
+- [x] Mỗi entity có một mục đích rõ ràng.
+- [x] Không có entity ngoài MVP.
+- [x] Mọi quan hệ N–N đều có entity trung gian.
+- [x] Mỗi quan hệ có cardinality.
+- [x] Mỗi quan hệ có optionality.
+- [x] Một task thuộc chính xác một project.
+- [x] Một user chỉ có một membership trong mỗi project.
+- [x] Assignee phải thuộc cùng project với task.
+- [x] Các FK ghép dự kiến đã được giải thích.
+- [x] Rule không thể bảo vệ bằng DB đã được ghi rõ.
+- [x] ERD không chốt sớm index hoặc `ON DELETE`.
