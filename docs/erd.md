@@ -2,7 +2,7 @@
 
 ## 1. Trạng thái tài liệu
 
-- Trạng thái: Draft
+- Trạng thái: Ready for Data Dictionary
 - Phiên bản: 1.0
 - Ngày tạo: 2026-08-25
 - Ngày cập nhật: 2026-08-26
@@ -205,6 +205,17 @@ USERS 0..1 — 0..N ACTIVITY_LOGS
 - Target user được sử dụng cho sự kiện thêm, xóa hoặc thay đổi role thành viên.
 - Log tạo project hoặc cập nhật task có thể không có target user.
 
+### R-10 — User thực hiện giao task
+
+```text
+USERS 1 — 0..N TASK_ASSIGNEES
+```
+
+- Mỗi assignment phải được tạo bởi chính xác một user.
+- Một user có thể thực hiện nhiều lần giao task.
+- task_assignees.assigned_by tham chiếu users.id.
+- Service phải kiểm tra người giao task có quyền trong project tại thời điểm giao.
+
 ## 6. Quy tắc khóa dự kiến
 
 ### `users`
@@ -235,6 +246,7 @@ USERS 0..1 — 0..N ACTIVITY_LOGS
 - Khóa ghép: `(task_id, user_id)`.
 - `(task_id, project_id)` dự kiến tham chiếu `(tasks.id, tasks.project_id)`.
 - `(project_id, user_id)` dự kiến tham chiếu `(project_members.project_id, project_members.user_id)`.
+- `assigned_by` tham chiếu `users.id`.
 
 `project_id` xuất hiện trong `task_assignees` dù có thể suy ra từ task. Đây là sự lặp có chủ đích để PostgreSQL có thể ngăn việc gán user thuộc project khác.
 
