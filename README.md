@@ -14,12 +14,14 @@ Dự án được xây dựng để thực hành phát triển một ứng dụn
 - Tạo `PROJECT_CONTEXT.md`.
 - Kiểm tra cài đặt, build và development server.
 - Phân tích phạm vi MVP và business rule.
+- Thiết kế ERD và cardinality cho TaskFlow MVP.
 
 Xem đặc tả MVP tại [docs/spec.md](./docs/spec.md).
+Xem ERD tại [docs/erd.md](./docs/erd.md).
 
 Chưa thực hiện:
 
-- Thiết kế ERD và cơ sở dữ liệu.
+- Từ điển dữ liệu và thiết kế vật lý cơ sở dữ liệu.
 - PostgreSQL và Docker Compose.
 - Drizzle ORM và Zod.
 - API.

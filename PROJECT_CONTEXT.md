@@ -17,10 +17,15 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 - Đã xác định phạm vi MVP.
 - Đã xác định actor và vai trò `owner`, `member`, `viewer`.
 - Đã viết business rule và acceptance criteria tại `docs/spec.md`.
+- Đã thiết kế ERD và cardinality tại `docs/erd.md`.
+- Đã xác định sáu entity của MVP.
+- Đã xác định các quan hệ N–N và bảng nối.
+- Đã xác định constraint dự kiến và rule cần service/transaction.
 
 Chưa thực hiện:
 
-- Chưa thiết kế cơ sở dữ liệu.
+- Chưa viết từ điển dữ liệu và chọn kiểu dữ liệu PostgreSQL.
+- Chưa triển khai schema vật lý hoặc migration.
 - Chưa cài Drizzle ORM và Zod.
 - Chưa tạo PostgreSQL bằng Docker Compose.
 - Chưa xây dựng API.
@@ -133,10 +138,11 @@ Không ghi một lệnh vào tài liệu nếu lệnh đó chưa tồn tại ho�
 
 Những nội dung sau phải được phân tích trước khi triển khai:
 
-- Danh sách entity.
-- Quan hệ giữa các entity.
 - API contract.
 - Kiểu khóa chính.
+- Kiểu dữ liệu.
+- Nullability và default.
+- Quy tắc ON DELETE.
 - Index.
 - Authentication provider.
 
@@ -198,3 +204,29 @@ Chưa thực hiện:
 - Từ điển dữ liệu.
 - Schema và migration.
 - API implementation.
+
+## 14. Bằng chứng kiểm tra Buổi 3
+
+Ngày kiểm tra: 2026-08-26
+
+Tài liệu:
+
+- `docs/spec.md` phiên bản 1.1
+- `docs/erd.md`
+
+Đã xác nhận:
+
+- Sáu entity thuộc phạm vi MVP.
+- Cardinality và optionality.
+- Hai quan hệ N–N có entity trung gian.
+- Membership duy nhất theo project và user.
+- Assignee phải thuộc cùng project với task.
+- Constraint dự kiến.
+- Business rule cần service hoặc transaction.
+
+Chưa thực hiện:
+
+- Từ điển dữ liệu.
+- Schema Drizzle.
+- Migration.
+- PostgreSQL.
