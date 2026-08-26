@@ -142,13 +142,16 @@ Không ghi một lệnh vào tài liệu nếu lệnh đó chưa tồn tại ho�
 
 Những nội dung sau phải được phân tích trước khi triển khai:
 
+- Phiên bản PostgreSQL và cấu hình Docker Compose.
 - API contract.
-- Kiểu khóa chính.
-- Kiểu dữ liệu.
-- Nullability và default.
-- Quy tắc ON DELETE.
-- Index.
+- Index tối ưu theo truy vấn.
 - Authentication provider.
+
+Các quyết định đã chốt nằm tại:
+
+- Đặc tả nghiệp vụ: `docs/spec.md`.
+- ERD logic: `docs/erd.md`.
+- Thiết kế dữ liệu chi tiết: `docs/data-dictionary.md`.
 
 Nếu thiếu thông tin, phải đặt câu hỏi thay vì tự giả định.
 

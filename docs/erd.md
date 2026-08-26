@@ -21,13 +21,13 @@ ERD này dùng để:
 - Ánh xạ business rule sang constraint dự kiến.
 - Làm đầu vào cho từ điển dữ liệu ở Buổi 4.
 
-Tài liệu chưa quyết định:
+Kiểu dữ liệu, khóa, nullability, default và quy tắc ON DELETE đã được chốt tại [data-dictionary.md](./data-dictionary.md).
 
-- Kiểu dữ liệu PostgreSQL chính xác.
-- Kiểu khóa chính cụ thể.
-- Index.
-- Quy tắc `ON DELETE`.
+Tài liệu ERD chưa mô tả:
+
+- Index tối ưu theo truy vấn.
 - Cấu trúc migration.
+- Cách biểu diễn bằng Drizzle ORM.
 
 ## 3. Danh sách entity
 
@@ -305,20 +305,20 @@ Không cố dùng một CHECK constraint để truy vấn dữ liệu ở bảng
 - Không dùng một cột đa hình `entity_id` trong MVP vì PostgreSQL không thể tạo FK rõ ràng tới nhiều bảng.
 - Không thêm entity ngoài phạm vi MVP.
 
-## 10. Quyết định dành cho Buổi 4
+## 10. Quyết định đã chốt tại Buổi 4
 
-Buổi 4 sẽ quyết định:
+Buổi 4 đã chốt:
 
-- Kiểu khóa chính.
-- Kiểu dữ liệu PostgreSQL.
-- Độ dài chuỗi.
-- Nullability.
-- Default.
-- `ON DELETE`.
-- Cột audit cụ thể.
-- Có cần lưu metadata cho activity log hay không.
+- Khóa chính của entity sử dụng UUID.
+- Kiểu dữ liệu PostgreSQL của từng cột.
+- Độ dài và nullability của chuỗi.
+- Default value.
+- Mọi foreign key sử dụng `ON DELETE RESTRICT`.
+- Các cột audit.
+- Activity log sử dụng `metadata jsonb`.
+- Các giá trị hữu hạn sử dụng `text` kết hợp `CHECK`.
 
-Buổi 4 chưa quyết định index tối ưu hiệu năng; index theo truy vấn sẽ được đánh giá ở giai đoạn sau.
+Index tối ưu hiệu năng chưa được quyết định. Index sẽ được phân tích từ API contract và các truy vấn thực tế.
 
 ## 11. Checklist review ERD
 

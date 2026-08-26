@@ -176,5 +176,25 @@ Lưu lịch sử những hành động quan trọng trong project.
 - `FOREIGN KEY (actor_id) REFERENCES users(id) ON DELETE RESTRICT`
 - `FOREIGN KEY (task_id, project_id) REFERENCES tasks(id, project_id) ON DELETE RESTRICT`
 - `FOREIGN KEY (target_user_id) REFERENCES users(id) ON DELETE RESTRICT`
-- `CHECK (action IN (...danh sách action...))`
+- `CHECK (action IN ('project_created', 'member_added', 'member_removed', 'member_role_changed', 'task_created', 'task_status_changed', 'task_assigned', 'task_unassigned'))`
 - `CHECK (jsonb_typeof(metadata) = 'object')`
+
+## 10. Quy tắc tham chiếu của activity log
+
+| Nhóm action | `task_id` | `target_user_id` |
+|---|:---:|:---:|
+| `project_created` | `NULL` | `NULL` |
+| `member_added`, `member_removed`, `member_role_changed` | `NULL` | Bắt buộc |
+| `task_created`, `task_status_changed` | Bắt buộc | `NULL` |
+| `task_assigned`, `task_unassigned` | Bắt buộc | Bắt buộc |
+
+Các quy tắc trên có thể được bảo vệ bằng table-level CHECK constraint vì chúng chỉ kiểm tra dữ liệu trong cùng một dòng.
+
+Khóa ngoại ghép `(task_id, project_id)` bảo đảm task được tham chiếu thuộc đúng project của activity log.
+
+Activity log là bất biến trong MVP:
+
+- Không có API cập nhật activity log.
+- Không có API xóa activity log.
+- Không có cột `updated_at`.
+- Log phải được tạo trong cùng transaction với hành động nghiệp vụ.
