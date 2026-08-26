@@ -2,11 +2,12 @@
 
 ## 1. Trạng thái tài liệu
 
-- Trạng thái: Ready for Data Dictionary
-- Phiên bản: 1.0
+- Trạng thái: Aligned with Data Dictionary
+- Phiên bản: 1.1
 - Ngày tạo: 2026-08-25
 - Ngày cập nhật: 2026-08-26
 - Nguồn nghiệp vụ: [spec.md](./spec.md)
+- Thiết kế chi tiết: [data-dictionary.md](./data-dictionary.md)
 
 ## 2. Mục tiêu
 
@@ -46,6 +47,8 @@ erDiagram
     USERS {
         identifier id PK
         text display_name
+        datetime created_at
+        datetime updated_at
     }
 
     PROJECTS {
@@ -54,6 +57,7 @@ erDiagram
         text description
         identifier created_by FK
         datetime created_at
+        datetime updated_at
     }
 
     PROJECT_MEMBERS {
@@ -61,6 +65,7 @@ erDiagram
         identifier user_id PK, FK
         text role
         datetime joined_at
+        datetime updated_at
     }
 
     TASKS {
@@ -92,6 +97,7 @@ erDiagram
         identifier target_user_id FK
         text action
         datetime created_at
+        json metadata
     }
 
     USERS ||..o{ PROJECTS : creates

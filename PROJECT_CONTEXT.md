@@ -21,10 +21,14 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 - Đã xác định sáu entity của MVP.
 - Đã xác định các quan hệ N–N và bảng nối.
 - Đã xác định constraint dự kiến và rule cần service/transaction.
+- Đã viết Data Dictionary cho sáu bảng của MVP.
+- Đã chốt UUID, kiểu dữ liệu, nullability và default.
+- Đã chốt primary key, foreign key, unique và check constraint.
+- Đã chốt quy tắc ON DELETE RESTRICT.
+- Đã xác định cột audit và metadata của activity log.
 
 Chưa thực hiện:
 
-- Chưa viết từ điển dữ liệu và chọn kiểu dữ liệu PostgreSQL.
 - Chưa triển khai schema vật lý hoặc migration.
 - Chưa cài Drizzle ORM và Zod.
 - Chưa tạo PostgreSQL bằng Docker Compose.
@@ -230,3 +234,31 @@ Chưa thực hiện:
 - Schema Drizzle.
 - Migration.
 - PostgreSQL.
+
+## 15. Bằng chứng kiểm tra Buổi 4
+
+Ngày kiểm tra: 2026-08-26
+
+Tài liệu:
+
+- `docs/data-dictionary.md`
+- `docs/erd.md`
+
+Đã xác nhận:
+
+- Kiểu khóa chính UUID.
+- Kiểu dữ liệu PostgreSQL cho mọi cột.
+- Nullability và default.
+- Primary key, foreign key, unique và check constraint.
+- Hai foreign key ghép bảo vệ assignee cùng project.
+- Quy tắc ON DELETE RESTRICT.
+- Cột audit và metadata activity log.
+- Business rule cần service hoặc transaction.
+
+Chưa thực hiện:
+
+- PostgreSQL bằng Docker Compose.
+- Drizzle schema.
+- Migration.
+- Index tối ưu truy vấn.
+- API implementation.
