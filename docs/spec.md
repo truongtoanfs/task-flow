@@ -3,7 +3,7 @@
 ## 1. Trạng thái tài liệu
 
 - Trạng thái: Ready for ERD
-- Phiên bản: 1.0
+- Phiên bản: 1.1
 - Ngày tạo: 2026-08-25
 - Phạm vi: MVP
 - Người chịu trách nhiệm: Trương Văn Toàn
@@ -225,9 +225,11 @@ Không được gán trùng cùng một user vào cùng một task.
 
 ### BR-09 — Xóa thành viên đang được giao việc
 
-Không được xóa thành viên khỏi project nếu người đó đang được gán vào task chưa hoàn thành.
+Không được xóa thành viên khỏi project nếu người đó vẫn còn được gán vào bất kỳ task nào của project.
 
-Owner phải bỏ gán hoặc hoàn thành các task liên quan trước.
+Owner phải bỏ toàn bộ assignment của thành viên trước khi xóa membership.
+
+Activity log phải ghi lại việc bỏ gán và xóa thành viên.
 
 ### BR-10 — Giá trị của task
 
@@ -362,12 +364,13 @@ When owner đó bị xóa hoặc bị đổi sang role khác
 Then hệ thống trả về `409 Conflict`
 And project vẫn giữ owner hiện tại
 
-### AC-08 — Xóa thành viên đang có task
+### AC-08 — Xóa thành viên đang được gán task
 
-Given member M đang được gán vào một task chưa hoàn thành
+Given member M vẫn đang được gán vào một task của project
 When owner yêu cầu xóa M khỏi project
-Then hệ thống trả về `409 Conflict`
-And membership và assignment không thay đổi
+Then hệ thống trả về 409 Conflict
+And membership không thay đổi
+And assignment không thay đổi
 
 ### AC-09 — Status không hợp lệ
 
@@ -406,6 +409,8 @@ And role hiện tại của X không thay đổi
 - MVP không hỗ trợ xóa project hoặc task.
 - Cập nhật task sử dụng optimistic concurrency.
 - Authentication provider chưa được chọn trong Buổi 2.
+- Thành viên phải được bỏ khỏi toàn bộ task trước khi membership bị xóa.
+- Lịch sử gán và bỏ gán được lưu qua activity log.
 
 ## 13. Câu hỏi dành cho giai đoạn sau
 
