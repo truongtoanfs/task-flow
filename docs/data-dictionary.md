@@ -23,7 +23,7 @@ Tài liệu xác định thiết kế dữ liệu chi tiết của TaskFlow MVP:
 - Cột audit.
 - Phân chia trách nhiệm giữa database và service.
 
-Tài liệu chưa triển khai schema Drizzle, migration hoặc index tối ưu truy vấn.
+Schema Drizzle đã được triển khai tại `server/database/schema.ts`. Migration và index tối ưu truy vấn chưa được triển khai.
 
 ## 3. Quy ước chung
 
@@ -226,3 +226,12 @@ Data Dictionary đã được ánh xạ tại:
 
 ```bash
 pnpm db:export
+```
+
+Chưa thực hiện:
+
+- Tạo migration.
+- Chạy migration.
+- Tạo bảng trong PostgreSQL.
+- Kết nối Nuxt server với database.
+- Tạo index tối ưu truy vấn.
