@@ -11,11 +11,20 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "db:export": "drizzle-kit export"
   },
   "dependencies": {
+    "dotenv": "17.4.2",
+    "drizzle-orm": "0.45.2",
     "nuxt": "^4.5.2",
+    "postgres": "3.4.9",
     "vue": "^3.5.41",
-    "vue-router": "^5.2.0"
+    "vue-router": "^5.2.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.3.0",
+    "drizzle-kit": "0.31.10"
   }
 }

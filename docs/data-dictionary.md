@@ -2,12 +2,14 @@
 
 ## 1. Trạng thái tài liệu
 
-- Trạng thái: Ready for Physical Schema
-- Phiên bản: 1.0
+- Trạng thái: Implemented in Drizzle Schema
+- Phiên bản: 1.1
 - Ngày tạo: 2026-08-26
+- Ngày cập nhật: 2026-08-27
 - Phạm vi: TaskFlow MVP
 - Nguồn nghiệp vụ: [spec.md](./spec.md)
 - Nguồn mô hình logic: [erd.md](./erd.md)
+- Schema vật lý: [schema.ts](../server/database/schema.ts)
 
 ## 2. Mục tiêu
 
@@ -198,3 +200,29 @@ Activity log là bất biến trong MVP:
 - Không có API xóa activity log.
 - Không có cột `updated_at`.
 - Log phải được tạo trong cùng transaction với hành động nghiệp vụ.
+
+## 11. Trạng thái triển khai Drizzle
+
+Data Dictionary đã được ánh xạ tại:
+
+- `server/database/schema.ts`
+- `drizzle.config.ts`
+
+Đã triển khai:
+
+- Sáu bảng của MVP.
+- UUID và `gen_random_uuid()`.
+- `timestamptz` và `now()`.
+- Nullability và default.
+- Primary key đơn và khóa ghép.
+- Foreign key đơn và khóa ghép.
+- `ON DELETE RESTRICT`.
+- Unique constraint `(tasks.id, tasks.project_id)`.
+- Check constraint cho chuỗi và giá trị hữu hạn.
+- Check constraint cho cấu trúc activity log.
+- TypeScript type cho select và insert.
+
+Đã kiểm tra bằng:
+
+```bash
+pnpm db:export

@@ -34,13 +34,20 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 - Đã xác minh kết nối, timezone UTC và `gen_random_uuid()`.
 - Đã xác minh dữ liệu tồn tại sau khi tạo lại container.
 - Đã viết hướng dẫn tại `docs/database-setup.md`.
+- Đã cài Drizzle ORM, Drizzle Kit, PostgreSQL driver, dotenv và Zod.
+- Đã tạo cấu hình Drizzle tại `drizzle.config.ts`.
+- Đã ánh xạ Data Dictionary thành `server/database/schema.ts`.
+- Đã khai báo đủ sáu bảng của MVP.
+- Đã khai báo primary key, foreign key, unique và check constraint.
+- Đã khai báo hai khóa ngoại ghép của `task_assignees`.
+- Đã khai báo khóa ngoại ghép của `activity_logs`.
+- Đã khai báo check constraint cho cấu trúc activity log.
+- Đã xuất và review SQL DDL bằng `pnpm db:export`.
 
 Chưa thực hiện:
 
-- Chưa cài Drizzle ORM, PostgreSQL driver và Zod.
-- Chưa ánh xạ Data Dictionary thành Drizzle schema.
 - Chưa tạo hoặc chạy migration.
-- Chưa tạo các bảng nghiệp vụ.
+- Chưa tạo các bảng nghiệp vụ trong PostgreSQL.
 - Chưa kết nối Nuxt server với database.
 - Chưa xây dựng API.
 - Chưa có chức năng đăng nhập và phân quyền.
@@ -309,3 +316,45 @@ Chưa thực hiện:
 - Migration.
 - Bảng nghiệp vụ.
 - API database integration.
+
+## 17. Bằng chứng kiểm tra Buổi 6
+
+Ngày kiểm tra: 2026-08-27
+
+File triển khai:
+
+- `drizzle.config.ts`
+- `server/database/schema.ts`
+- `docs/data-dictionary.md`
+
+Packages:
+
+- `drizzle-orm`
+- `drizzle-kit`
+- `postgres`
+- `dotenv`
+- `zod`
+
+Đã xác nhận:
+
+- Schema có đúng sáu bảng MVP.
+- UUID sinh bằng `gen_random_uuid()`.
+- Thời điểm dùng `timestamp with time zone`.
+- Default thời gian là `now()`.
+- Giá trị hữu hạn dùng `text + CHECK`.
+- Có đủ primary key đơn và khóa ghép.
+- Có đủ foreign key đơn và khóa ghép.
+- Mọi foreign key sử dụng `ON DELETE RESTRICT`.
+- `activity_logs.metadata` là `jsonb` object.
+- Quy tắc `task_id` và `target_user_id` được bảo vệ bằng CHECK.
+- `pnpm db:export` thành công.
+- `pnpm build` thành công.
+- PostgreSQL chưa có bảng nghiệp vụ.
+- Chưa có migration được tạo.
+
+Chưa thực hiện:
+
+- Generate migration.
+- Apply migration.
+- Database client cho Nuxt.
+- API implementation.
