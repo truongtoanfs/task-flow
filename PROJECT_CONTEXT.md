@@ -26,6 +26,14 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 - Đã chốt primary key, foreign key, unique và check constraint.
 - Đã chốt quy tắc ON DELETE RESTRICT.
 - Đã xác định cột audit và metadata của activity log.
+- Đã chọn PostgreSQL 17.11 cho TaskFlow.
+- Đã cấu hình PostgreSQL bằng Docker Compose.
+- Đã pin image `postgres:17.11-alpine3.24`.
+- Đã cấu hình named volume `postgres_data`.
+- Đã cấu hình healthcheck bằng `pg_isready`.
+- Đã xác minh kết nối, timezone UTC và `gen_random_uuid()`.
+- Đã xác minh dữ liệu tồn tại sau khi tạo lại container.
+- Đã viết hướng dẫn tại `docs/database-setup.md`.
 
 Chưa thực hiện:
 
@@ -35,6 +43,11 @@ Chưa thực hiện:
 - Chưa xây dựng API.
 - Chưa có chức năng đăng nhập và phân quyền.
 - Chưa có test.
+- Chưa cài Drizzle ORM và PostgreSQL driver.
+- Chưa ánh xạ Data Dictionary thành Drizzle schema.
+- Chưa tạo hoặc chạy migration.
+- Chưa tạo các bảng nghiệp vụ.
+- Chưa kết nối Nuxt server với database.
 
 AI không được coi các phần “chưa thực hiện” là đã tồn tại.
 
@@ -265,3 +278,36 @@ Chưa thực hiện:
 - Migration.
 - Index tối ưu truy vấn.
 - API implementation.
+
+## 16. Bằng chứng kiểm tra Buổi 5
+
+Ngày kiểm tra: 2026-08-27
+
+Cấu hình:
+
+- PostgreSQL `17.11`.
+- Docker image `postgres:17.11-alpine3.24`.
+- Database `taskflow`.
+- User local `taskflow`.
+- Host binding `127.0.0.1`.
+- Named volume `postgres_data`.
+- Timezone UTC.
+
+Đã xác nhận:
+
+- `docker compose config --quiet` thành công.
+- PostgreSQL chuyển sang trạng thái `healthy`.
+- Có thể kết nối bằng `psql`.
+- `current_database()` trả về `taskflow`.
+- `current_user` trả về `taskflow`.
+- `gen_random_uuid()` hoạt động.
+- Dữ liệu vẫn tồn tại sau `docker compose down` và `up`.
+- Database đã được trả về trạng thái trống sau bài kiểm tra.
+
+Chưa thực hiện:
+
+- Drizzle ORM.
+- Schema TypeScript.
+- Migration.
+- Bảng nghiệp vụ.
+- API database integration.
