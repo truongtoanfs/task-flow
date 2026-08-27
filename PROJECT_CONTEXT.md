@@ -37,17 +37,14 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 
 Chưa thực hiện:
 
-- Chưa triển khai schema vật lý hoặc migration.
-- Chưa cài Drizzle ORM và Zod.
-- Chưa tạo PostgreSQL bằng Docker Compose.
-- Chưa xây dựng API.
-- Chưa có chức năng đăng nhập và phân quyền.
-- Chưa có test.
-- Chưa cài Drizzle ORM và PostgreSQL driver.
+- Chưa cài Drizzle ORM, PostgreSQL driver và Zod.
 - Chưa ánh xạ Data Dictionary thành Drizzle schema.
 - Chưa tạo hoặc chạy migration.
 - Chưa tạo các bảng nghiệp vụ.
 - Chưa kết nối Nuxt server với database.
+- Chưa xây dựng API.
+- Chưa có chức năng đăng nhập và phân quyền.
+- Chưa có test.
 
 AI không được coi các phần “chưa thực hiện” là đã tồn tại.
 
@@ -155,16 +152,17 @@ Không ghi một lệnh vào tài liệu nếu lệnh đó chưa tồn tại ho�
 
 Những nội dung sau phải được phân tích trước khi triển khai:
 
-- Phiên bản PostgreSQL và cấu hình Docker Compose.
 - API contract.
 - Index tối ưu theo truy vấn.
 - Authentication provider.
+- Cấu hình database production.
 
 Các quyết định đã chốt nằm tại:
 
 - Đặc tả nghiệp vụ: `docs/spec.md`.
 - ERD logic: `docs/erd.md`.
 - Thiết kế dữ liệu chi tiết: `docs/data-dictionary.md`.
+- Hạ tầng PostgreSQL local: `docs/database-setup.md`.
 
 Nếu thiếu thông tin, phải đặt câu hỏi thay vì tự giả định.
 
