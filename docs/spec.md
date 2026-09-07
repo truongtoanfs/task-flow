@@ -2,11 +2,12 @@
 
 ## 1. Trạng thái tài liệu
 
-- Trạng thái: Ready for ERD
-- Phiên bản: 1.1
+- Trạng thái: Aligned with API Conventions
+- Phiên bản: 1.2
 - Ngày tạo: 2026-08-25
 - Phạm vi: MVP
 - Người chịu trách nhiệm: Trương Văn Toàn
+- Quy ước API: [api-conventions.md](./api-conventions.md)
 
 ## 2. Mục tiêu sản phẩm
 
@@ -299,15 +300,17 @@ Nếu muốn thay đổi quyền, owner phải cập nhật role của membershi
 
 ## 10. Quy ước lỗi
 
-| Tình huống | Kết quả mong đợi |
-|---|---|
-| Chưa đăng nhập | `401 Unauthorized` |
-| Đã đăng nhập nhưng không có quyền | `403 Forbidden` |
-| Không tìm thấy tài nguyên | `404 Not Found` |
-| Trạng thái hiện tại xung đột với yêu cầu | `409 Conflict` |
-| Dữ liệu đầu vào không hợp lệ | `422 Unprocessable Entity` |
+| Tình huống | HTTP | Error code |
+|---|---:|---|
+| Request không đọc được | 400 | `BAD_REQUEST` |
+| Chưa đăng nhập | 401 | `AUTHENTICATION_REQUIRED` |
+| Không có quyền | 403 | `FORBIDDEN` |
+| Không tìm thấy tài nguyên | 404 | `RESOURCE_NOT_FOUND` |
+| Xung đột nghiệp vụ | 409 | Conflict code cụ thể |
+| Input không hợp lệ | 422 | `VALIDATION_ERROR` |
+| Lỗi ngoài dự kiến | 500 | `INTERNAL_ERROR` |
 
-Tên error code chi tiết sẽ được chốt khi thiết kế API contract.
+Quy ước chi tiết nằm tại [api-conventions.md](./api-conventions.md).
 
 ## 11. Acceptance criteria
 

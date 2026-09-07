@@ -18,6 +18,9 @@ Dự án được xây dựng để thực hành phát triển một ứng dụn
 - Kiểm tra primary key, foreign key, unique và check constraint.
 - Tạo bộ seed data ổn định cho local development và test.
 - Đã kiểm tra seed chạy lặp không tạo dữ liệu trùng.
+- Chuẩn hóa Zod validation cho task API.
+- Chuẩn hóa success và error response.
+- Thêm unit test cho validation và error handling.
 
 Tài liệu:
 
@@ -27,13 +30,14 @@ Tài liệu:
 - [Thiết lập PostgreSQL](./docs/database-setup.md)
 - [Quy trình migration](./docs/migrations.md)
 - [Seed data](./docs/seed-data.md)
+- [API conventions](./docs/api-conventions.md)
 
 Chưa thực hiện:
 
 - Database client cho Nuxt server.
 - API.
 - Đăng nhập và phân quyền.
-- Test tự động.
+- Integration test và API test.
 - Index tối ưu truy vấn.
 
 ## Công nghệ hiện tại
@@ -102,6 +106,12 @@ pnpm db:seed
 ## Generate migration mới sau khi thay đổi Drizzle schema
 ```bash
 pnpm db:generate --name=<migration_name>
+```
+
+## Chạy unit test
+
+```bash
+pnpm test
 ```
 
 ## Chạy development server
