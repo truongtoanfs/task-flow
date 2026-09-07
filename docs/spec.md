@@ -298,6 +298,8 @@ Mỗi membership chỉ có một role tại một thời điểm:
 
 Nếu muốn thay đổi quyền, owner phải cập nhật role của membership hiện tại thay vì tạo membership mới.
 
+## 10. Quy ước lỗi
+
 | Tình huống | HTTP | Error code |
 |---|---:|---|
 | Request không đọc được | 400 | `BAD_REQUEST` |

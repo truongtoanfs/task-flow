@@ -112,6 +112,7 @@ pnpm db:generate --name=<migration_name>
 
 ```bash
 pnpm test
+```
 
 ## Chạy development server
 
