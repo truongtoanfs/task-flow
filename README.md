@@ -16,6 +16,8 @@ Dự án được xây dựng để thực hành phát triển một ứng dụn
 - Generate và review initial migration.
 - Apply migration thành công trên PostgreSQL local.
 - Kiểm tra primary key, foreign key, unique và check constraint.
+- Tạo bộ seed data ổn định cho local development và test.
+- Đã kiểm tra seed chạy lặp không tạo dữ liệu trùng.
 
 Tài liệu:
 
@@ -24,10 +26,10 @@ Tài liệu:
 - [Data Dictionary](./docs/data-dictionary.md)
 - [Thiết lập PostgreSQL](./docs/database-setup.md)
 - [Quy trình migration](./docs/migrations.md)
+- [Seed data](./docs/seed-data.md)
 
 Chưa thực hiện:
 
-- Seed data.
 - Database client cho Nuxt server.
 - API.
 - Đăng nhập và phân quyền.
@@ -89,6 +91,12 @@ docker compose ps
 ## Apply các migration chưa chạy
 ```bash
 pnpm db:migrate
+```
+
+### Nạp dữ liệu mẫu
+
+```bash
+pnpm db:seed
 ```
 
 ## Generate migration mới sau khi thay đổi Drizzle schema
