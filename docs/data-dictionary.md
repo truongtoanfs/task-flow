@@ -2,12 +2,14 @@
 
 ## 1. Trạng thái tài liệu
 
-- Trạng thái: Ready for Physical Schema
-- Phiên bản: 1.0
+- Trạng thái: Implemented in Drizzle Schema
+- Phiên bản: 1.1
 - Ngày tạo: 2026-08-26
+- Ngày cập nhật: 2026-08-27
 - Phạm vi: TaskFlow MVP
 - Nguồn nghiệp vụ: [spec.md](./spec.md)
 - Nguồn mô hình logic: [erd.md](./erd.md)
+- Schema vật lý: [schema.ts](../server/database/schema.ts)
 
 ## 2. Mục tiêu
 
@@ -21,7 +23,7 @@ Tài liệu xác định thiết kế dữ liệu chi tiết của TaskFlow MVP:
 - Cột audit.
 - Phân chia trách nhiệm giữa database và service.
 
-Tài liệu chưa triển khai schema Drizzle, migration hoặc index tối ưu truy vấn.
+Schema Drizzle đã được triển khai tại `server/database/schema.ts`. Migration và index tối ưu truy vấn chưa được triển khai.
 
 ## 3. Quy ước chung
 
@@ -198,3 +200,38 @@ Activity log là bất biến trong MVP:
 - Không có API xóa activity log.
 - Không có cột `updated_at`.
 - Log phải được tạo trong cùng transaction với hành động nghiệp vụ.
+
+## 11. Trạng thái triển khai Drizzle
+
+Data Dictionary đã được ánh xạ tại:
+
+- `server/database/schema.ts`
+- `drizzle.config.ts`
+
+Đã triển khai:
+
+- Sáu bảng của MVP.
+- UUID và `gen_random_uuid()`.
+- `timestamptz` và `now()`.
+- Nullability và default.
+- Primary key đơn và khóa ghép.
+- Foreign key đơn và khóa ghép.
+- `ON DELETE RESTRICT`.
+- Unique constraint `(tasks.id, tasks.project_id)`.
+- Check constraint cho chuỗi và giá trị hữu hạn.
+- Check constraint cho cấu trúc activity log.
+- TypeScript type cho select và insert.
+
+Đã kiểm tra bằng:
+
+```bash
+pnpm db:export
+```
+
+Chưa thực hiện:
+
+- Tạo migration.
+- Chạy migration.
+- Tạo bảng trong PostgreSQL.
+- Kết nối Nuxt server với database.
+- Tạo index tối ưu truy vấn.
