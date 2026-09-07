@@ -51,10 +51,14 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 - Đã xác minh mọi foreign key sử dụng `ON DELETE RESTRICT`.
 - Đã xác minh migration chạy lần hai không tạo thay đổi trùng.
 - Đã viết quy trình migration tại `docs/migrations.md`.
+- Đã tạo seed tại `server/database/seed.ts`.
+- Đã tạo đủ owner, member, viewer và outsider.
+- Đã tạo project, task, assignee và activity log mẫu.
+- Đã chuẩn bị dữ liệu phục vụ kiểm tra quyền, filter và trường hợp biên.
+- Đã xác minh seed chạy lặp không tạo dữ liệu trùng.
 
 Chưa thực hiện:
 
-- Chưa tạo seed data.
 - Chưa kết nối Nuxt server với database.
 - Chưa xây dựng API.
 - Chưa có chức năng đăng nhập và phân quyền.
@@ -79,16 +83,13 @@ Phiên bản chính xác phải được đọc từ:
 
 Không tự suy đoán phiên bản thư viện.
 
-## 4. Công nghệ dự kiến
+## 4. Công nghệ chưa triển khai
 
-Các công nghệ sau chưa được cài đặt ở thời điểm hiện tại:
+- Element Plus hoặc BFC UI.
+- Authentication provider.
+- Hạ tầng database production.
 
-- PostgreSQL
-- Drizzle ORM
-- Zod
-- Element Plus hoặc BFC UI
-
-Chỉ cài đặt khi đến đúng feature hoặc chặng triển khai.
+PostgreSQL, Drizzle ORM và Zod đã được cài đặt.
 
 ## 5. Mô hình thực thi
 
@@ -160,6 +161,10 @@ pnpm install
 pnpm dev
 pnpm build
 pnpm preview
+pnpm db:export
+pnpm db:generate
+pnpm db:migrate
+pnpm db:seed
 ```
 Không ghi một lệnh vào tài liệu nếu lệnh đó chưa tồn tại hoặc chưa được kiểm tra.
 
@@ -400,3 +405,35 @@ Chưa thực hiện:
 - Seed data.
 - Nuxt database client.
 - API implementation.
+
+## 19. Bằng chứng kiểm tra Buổi 8
+
+File triển khai:
+
+- `server/database/seed.ts`
+- `docs/seed-data.md`
+
+Đã xác nhận:
+
+- Seed chạy bằng Drizzle ORM và postgres.js.
+- Seed chạy trong một transaction.
+- UUID của dữ liệu mẫu là cố định.
+- Seed sử dụng `onConflictDoNothing()`.
+- Có đủ role owner, member và viewer.
+- Có outsider không thuộc project.
+- Có đủ status và priority của task.
+- Có task không assignee và task có nhiều assignee.
+- Có title đúng giới hạn 200 ký tự.
+- Seed lần đầu thành công.
+- Seed lần hai không tăng số dòng.
+- `pnpm build` thành công.
+- Không thay đổi schema hoặc migration.
+
+Chưa thực hiện:
+
+- Validation convention.
+- API contract.
+- Nuxt database client.
+- API implementation.
+- Authentication và authorization.
+- Test tự động.

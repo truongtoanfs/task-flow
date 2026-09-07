@@ -14,7 +14,8 @@
     "postinstall": "nuxt prepare",
     "db:export": "drizzle-kit export",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "tsx server/database/seed.ts"
   },
   "dependencies": {
     "dotenv": "17.4.2",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "^26.3.0",
-    "drizzle-kit": "0.31.10"
+    "drizzle-kit": "0.31.10",
+    "tsx": "4.23.13"
   }
 }
