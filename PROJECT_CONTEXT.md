@@ -56,13 +56,19 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 - Đã tạo project, task, assignee và activity log mẫu.
 - Đã chuẩn bị dữ liệu phục vụ kiểm tra quyền, filter và trường hợp biên.
 - Đã xác minh seed chạy lặp không tạo dữ liệu trùng.
+- Đã tạo Zod schema cho params, query và task body.
+- Đã sử dụng strict object để từ chối field lạ.
+- Đã chuẩn hóa success response và error response.
+- Đã chốt HTTP status và error code.
+- Đã tạo helper validation và API handler.
+- Đã thêm unit test bằng Vitest.
 
 Chưa thực hiện:
 
 - Chưa kết nối Nuxt server với database.
 - Chưa xây dựng API.
 - Chưa có chức năng đăng nhập và phân quyền.
-- Chưa có test.
+- Chưa có integration test và API test.
 - Chưa tạo index tối ưu truy vấn.
 
 AI không được coi các phần “chưa thực hiện” là đã tồn tại.
@@ -165,6 +171,7 @@ pnpm db:export
 pnpm db:generate
 pnpm db:migrate
 pnpm db:seed
+pnpm test
 ```
 Không ghi một lệnh vào tài liệu nếu lệnh đó chưa tồn tại hoặc chưa được kiểm tra.
 
@@ -172,7 +179,7 @@ Không ghi một lệnh vào tài liệu nếu lệnh đó chưa tồn tại ho�
 
 Những nội dung sau phải được phân tích trước khi triển khai:
 
-- API contract.
+- Các endpoint contract ngoài API tạo task.
 - Index tối ưu theo truy vấn.
 - Authentication provider.
 - Cấu hình database production.
@@ -437,3 +444,39 @@ Chưa thực hiện:
 - API implementation.
 - Authentication và authorization.
 - Test tự động.
+
+## 20. Bằng chứng kiểm tra Buổi 9
+
+File triển khai:
+
+- `server/contracts/api.ts`
+- `server/utils/api-error.ts`
+- `server/utils/api-handler.ts`
+- `server/utils/request-validation.ts`
+- `server/validation/task.ts`
+- `docs/api-conventions.md`
+
+Đã xác nhận:
+
+- Params, query và body có Zod schema.
+- Strict object từ chối field lạ.
+- Title được trim và giới hạn 200 ký tự.
+- Description rỗng được chuyển thành NULL.
+- Status và priority chỉ nhận giá trị hợp lệ.
+- Pagination được coerce và giới hạn.
+- Update task bắt buộc có version.
+- Validation error trả về 422.
+- Malformed request được quy ước là 400.
+- Error response không lộ SQL hoặc stack trace.
+- Có 3 test files và 16 test cases.
+- `pnpm test` thành công.
+- `pnpm build` thành công.
+
+Chưa thực hiện:
+
+- API endpoint.
+- Nuxt database client.
+- Authentication và authorization.
+- Service và repository.
+- Transaction nghiệp vụ.
+- Integration test.
