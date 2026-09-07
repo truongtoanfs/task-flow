@@ -2,14 +2,15 @@
 
 ## 1. Trạng thái tài liệu
 
-- Trạng thái: Implemented in Drizzle Schema
-- Phiên bản: 1.1
+- Trạng thái: Implemented and Migrated
+- Phiên bản: 1.2
 - Ngày tạo: 2026-08-26
 - Ngày cập nhật: 2026-08-27
 - Phạm vi: TaskFlow MVP
 - Nguồn nghiệp vụ: [spec.md](./spec.md)
 - Nguồn mô hình logic: [erd.md](./erd.md)
 - Schema vật lý: [schema.ts](../server/database/schema.ts)
+- Initial migration: [0000_init_taskflow.sql](../drizzle/0000_init_taskflow.sql)
 
 ## 2. Mục tiêu
 
@@ -228,10 +229,17 @@ Data Dictionary đã được ánh xạ tại:
 pnpm db:export
 ```
 
+Đã triển khai migration:
+
+- Đã generate initial migration.
+- Đã review SQL migration.
+- Đã apply migration trên PostgreSQL trống.
+- Đã xác minh sáu bảng và toàn bộ constraint.
+- Đã xác minh migration chạy lặp an toàn.
+
 Chưa thực hiện:
 
-- Tạo migration.
-- Chạy migration.
-- Tạo bảng trong PostgreSQL.
+- Seed data.
 - Kết nối Nuxt server với database.
-- Tạo index tối ưu truy vấn.
+- Index tối ưu truy vấn.
+- API implementation.

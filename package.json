@@ -12,7 +12,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "db:export": "drizzle-kit export"
+    "db:export": "drizzle-kit export",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "dotenv": "17.4.2",
