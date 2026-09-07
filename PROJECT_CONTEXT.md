@@ -43,15 +43,23 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 - Đã khai báo khóa ngoại ghép của `activity_logs`.
 - Đã khai báo check constraint cho cấu trúc activity log.
 - Đã xuất và review SQL DDL bằng `pnpm db:export`.
+- Đã generate initial migration `drizzle/0000_init_taskflow.sql`.
+- Đã review SQL của initial migration.
+- Đã apply migration vào PostgreSQL local.
+- Đã tạo đủ sáu bảng nghiệp vụ.
+- Đã xác minh 6 primary key, 12 foreign key, 1 unique và 15 check constraint.
+- Đã xác minh mọi foreign key sử dụng `ON DELETE RESTRICT`.
+- Đã xác minh migration chạy lần hai không tạo thay đổi trùng.
+- Đã viết quy trình migration tại `docs/migrations.md`.
 
 Chưa thực hiện:
 
-- Chưa tạo hoặc chạy migration.
-- Chưa tạo các bảng nghiệp vụ trong PostgreSQL.
+- Chưa tạo seed data.
 - Chưa kết nối Nuxt server với database.
 - Chưa xây dựng API.
 - Chưa có chức năng đăng nhập và phân quyền.
 - Chưa có test.
+- Chưa tạo index tối ưu truy vấn.
 
 AI không được coi các phần “chưa thực hiện” là đã tồn tại.
 
@@ -357,4 +365,38 @@ Chưa thực hiện:
 - Generate migration.
 - Apply migration.
 - Database client cho Nuxt.
+- API implementation.
+
+## 18. Bằng chứng kiểm tra Buổi 7
+
+Ngày kiểm tra: 2026-08-27
+
+Migration:
+
+- `drizzle/0000_init_taskflow.sql`
+- `drizzle/meta/0000_snapshot.json`
+- `drizzle/meta/_journal.json`
+
+Đã xác nhận:
+
+- Initial migration được generate từ Drizzle schema.
+- Migration có đúng sáu `CREATE TABLE`.
+- Migration có 6 primary key.
+- Migration có 12 foreign key.
+- Migration có 1 unique constraint riêng.
+- Migration có 15 check constraint.
+- Tất cả foreign key sử dụng `ON DELETE RESTRICT`.
+- Không có PostgreSQL enum.
+- Không có lệnh xóa bảng hoặc xóa cột.
+- Migration đã apply thành công.
+- PostgreSQL có đúng sáu bảng nghiệp vụ.
+- Drizzle migration history có đúng một bản ghi.
+- Chạy lại migrate không tạo thay đổi trùng.
+- Các bảng nghiệp vụ chưa có dữ liệu.
+- `pnpm build` thành công.
+
+Chưa thực hiện:
+
+- Seed data.
+- Nuxt database client.
 - API implementation.

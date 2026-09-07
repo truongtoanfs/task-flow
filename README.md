@@ -8,27 +8,31 @@ Dự án được xây dựng để thực hành phát triển một ứng dụn
 
 Đã hoàn thành:
 
-- Khởi tạo Nuxt 4.
-- Cấu hình giao diện chạy CSR bằng `ssr: false`.
-- Cấu hình pnpm và lockfile.
-- Tạo `PROJECT_CONTEXT.md`.
-- Kiểm tra cài đặt, build và development server.
+- Khởi tạo Nuxt 4 chạy ở chế độ CSR.
 - Phân tích phạm vi MVP và business rule.
-- Thiết kế ERD và cardinality cho TaskFlow MVP.
+- Thiết kế ERD và Data Dictionary.
+- Dựng PostgreSQL 17.11 bằng Docker Compose.
+- Khai báo sáu bảng bằng Drizzle ORM.
+- Generate và review initial migration.
+- Apply migration thành công trên PostgreSQL local.
+- Kiểm tra primary key, foreign key, unique và check constraint.
 
-Xem đặc tả MVP tại [docs/spec.md](./docs/spec.md).
-Xem ERD tại [docs/erd.md](./docs/erd.md).
+Tài liệu:
+
+- [Đặc tả MVP](./docs/spec.md)
+- [ERD](./docs/erd.md)
+- [Data Dictionary](./docs/data-dictionary.md)
+- [Thiết lập PostgreSQL](./docs/database-setup.md)
+- [Quy trình migration](./docs/migrations.md)
 
 Chưa thực hiện:
 
-- Từ điển dữ liệu và thiết kế vật lý cơ sở dữ liệu.
-- PostgreSQL và Docker Compose.
-- Drizzle ORM và Zod.
+- Seed data.
+- Database client cho Nuxt server.
 - API.
 - Đăng nhập và phân quyền.
-- Test.
-
-Xem trạng thái và quy tắc dự án tại [PROJECT_CONTEXT.md](./PROJECT_CONTEXT.md).
+- Test tự động.
+- Index tối ưu truy vấn.
 
 ## Công nghệ hiện tại
 
@@ -37,14 +41,13 @@ Xem trạng thái và quy tắc dự án tại [PROJECT_CONTEXT.md](./PROJECT_CO
 - TypeScript
 - Nitro/H3
 - pnpm
-- CSR với `ssr: false`
-
-Các công nghệ dự kiến nhưng chưa cài đặt:
-
-- PostgreSQL
+- PostgreSQL 17.11
+- Docker Compose
 - Drizzle ORM
+- Drizzle Kit
+- postgres.js
 - Zod
-- Element Plus hoặc BFC UI
+- CSR với `ssr: false`
 
 ## Yêu cầu môi trường
 
@@ -68,6 +71,29 @@ Cài dependency đúng theo lockfile:
 
 ```bash
 pnpm install --frozen-lockfile
+```
+## Database local
+
+Tạo file môi trường:
+
+```bash
+cp .env.example .env
+```
+
+## Khởi động PostgreSQL
+```bash
+docker compose up -d
+docker compose ps
+```
+
+## Apply các migration chưa chạy
+```bash
+pnpm db:migrate
+```
+
+## Generate migration mới sau khi thay đổi Drizzle schema
+```bash
+pnpm db:generate --name=<migration_name>
 ```
 
 ## Chạy development server

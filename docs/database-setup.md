@@ -3,7 +3,8 @@
 ## 1. Trạng thái tài liệu
 
 - Trạng thái: Verified Local Infrastructure
-- Phiên bản: 1.0
+- Phiên bản: 1.1
+- Ngày cập nhật: 2026-08-27
 - Ngày tạo: 2026-08-27
 - Phạm vi: PostgreSQL local development
 - Thiết kế dữ liệu: [data-dictionary.md](./data-dictionary.md)
@@ -91,12 +92,20 @@ Chỉ sử dụng khi chủ động muốn khởi tạo lại database từ đ�
 - Các biến `POSTGRES_*` chỉ khởi tạo database khi volume còn trống.
 - Không ghi password thật vào tài liệu, source code hoặc commit.
 
-## 10. Phạm vi chưa thực hiện
+## 10. Trạng thái triển khai hiện tại
 
-- Chưa cài Drizzle ORM.
-- Chưa viết schema TypeScript.
-- Chưa tạo migration.
-- Chưa tạo sáu bảng nghiệp vụ.
-- Chưa tạo index tối ưu truy vấn.
-- Chưa kết nối Nuxt với PostgreSQL.
-- Chưa thiết kế cấu hình database production.
+Đã thực hiện:
+
+- Đã cài Drizzle ORM, Drizzle Kit và PostgreSQL driver.
+- Đã khai báo sáu bảng tại `server/database/schema.ts`.
+- Đã generate initial migration.
+- Đã apply migration vào PostgreSQL local.
+- Đã tạo sáu bảng nghiệp vụ.
+- Đã xác minh constraint và migration history.
+
+Chưa thực hiện:
+
+- Seed data.
+- Database client cho Nuxt server.
+- Index tối ưu truy vấn.
+- Cấu hình database production.
