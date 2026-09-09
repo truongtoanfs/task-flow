@@ -21,6 +21,11 @@ Dự án được xây dựng để thực hành phát triển một ứng dụn
 - Chuẩn hóa Zod validation cho task API.
 - Chuẩn hóa success và error response.
 - Thêm unit test cho validation và error handling.
+- Đã kết nối Nuxt server với PostgreSQL bằng Drizzle.
+- Đã triển khai development authentication context.
+- Đã triển khai authorization tạo task.
+- Đã triển khai `POST /api/projects/:projectId/tasks`.
+- Owner và member được tạo task; viewer bị từ chối.
 
 Tài liệu:
 
@@ -31,13 +36,14 @@ Tài liệu:
 - [Quy trình migration](./docs/migrations.md)
 - [Seed data](./docs/seed-data.md)
 - [API conventions](./docs/api-conventions.md)
+- [Create Task API](./docs/task-create-api.md)
 
 Chưa thực hiện:
 
-- Database client cho Nuxt server.
-- API.
-- Đăng nhập và phân quyền.
-- Integration test và API test.
+- Session authentication thật.
+- Transaction tạo task và activity log.
+- Các API ngoài chức năng tạo task.
+- Integration test tự động.
 - Index tối ưu truy vấn.
 
 ## Công nghệ hiện tại
@@ -61,7 +67,7 @@ Chưa thực hiện:
 - pnpm theo phiên bản được khai báo trong `package.json`
 - Git
 
-Docker sẽ được yêu cầu từ giai đoạn PostgreSQL.
+Docker Compose được sử dụng để chạy PostgreSQL local.
 
 ## Cài đặt
 
@@ -156,7 +162,7 @@ Trách nhiệm:
 - `server/repositories/`: truy vấn dữ liệu.
 - `server/database/`: kết nối, schema và migration.
 
-Các thư mục server sẽ được tạo khi dự án triển khai đến đúng giai đoạn.
+Các thư mục server hiện được tổ chức theo kiến trúc trên.
 
 ## Quy tắc phát triển
 

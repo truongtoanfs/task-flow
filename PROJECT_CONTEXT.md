@@ -62,13 +62,19 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 - Đã chốt HTTP status và error code.
 - Đã tạo helper validation và API handler.
 - Đã thêm unit test bằng Vitest.
+- Đã kết nối Nuxt server với PostgreSQL bằng Drizzle.
+- Đã tạo development actor phía server.
+- Đã tạo repository truy vấn membership và insert task.
+- Đã triển khai service kiểm tra quyền tạo task.
+- Đã triển khai `POST /api/projects/:projectId/tasks`.
+- Đã trả response thành công với HTTP 201.
+- Đã thêm unit test cho authentication context và authorization.
 
 Chưa thực hiện:
 
-- Chưa kết nối Nuxt server với database.
-- Chưa xây dựng API.
-- Chưa có chức năng đăng nhập và phân quyền.
-- Chưa có integration test và API test.
+- Chưa có session authentication thật.
+- Chưa ghi task và activity log trong cùng transaction.
+- Chưa có integration test tự động cho API.
 - Chưa tạo index tối ưu truy vấn.
 
 AI không được coi các phần “chưa thực hiện” là đã tồn tại.
@@ -480,3 +486,38 @@ Chưa thực hiện:
 - Service và repository.
 - Transaction nghiệp vụ.
 - Integration test.
+
+## 21. Bằng chứng kiểm tra Buổi 10
+
+File triển khai:
+
+- `server/database/client.ts`
+- `server/middleware/development-auth.ts`
+- `server/utils/current-actor.ts`
+- `server/repositories/project-member-repository.ts`
+- `server/repositories/task-repository.ts`
+- `server/services/task-service.ts`
+- `server/api/projects/[projectId]/tasks.post.ts`
+- `docs/task-create-api.md`
+
+Đã xác nhận:
+
+- Database client sử dụng Drizzle và postgres.js.
+- Actor được lấy từ server context.
+- Không nhận actor ID hoặc created-by từ client.
+- Owner và member được tạo task.
+- Viewer nhận `403 FORBIDDEN`.
+- Outsider nhận `404 RESOURCE_NOT_FOUND`.
+- Validation không hợp lệ trả `422 VALIDATION_ERROR`.
+- Request thành công trả `201 Created`.
+- Task được lưu trong PostgreSQL.
+- Có 5 test files và 22 test cases.
+- `pnpm test` thành công.
+- `pnpm build` thành công.
+- Không thay đổi schema hoặc migration.
+
+Chưa thực hiện:
+
+- Session authentication thật.
+- Transaction tạo task và activity log.
+- Integration test tự động.
