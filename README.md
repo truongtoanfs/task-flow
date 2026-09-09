@@ -31,6 +31,7 @@ Tài liệu:
 - [Quy trình migration](./docs/migrations.md)
 - [Seed data](./docs/seed-data.md)
 - [API conventions](./docs/api-conventions.md)
+- [Create Task API](./docs/task-create-api.md)
 
 Chưa thực hiện:
 

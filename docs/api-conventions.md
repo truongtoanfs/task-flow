@@ -170,12 +170,19 @@ Response thành công dự kiến:
 
 HTTP status thành công: `201 Created`.
 
-## 9. Phạm vi chưa triển khai
+## 9. Trạng thái triển khai
 
-- API endpoint.
-- Session authentication.
-- Authorization.
-- Repository.
-- Service.
-- Database client cho Nuxt.
+Đã triển khai:
+
+- Database client cho Nuxt server.
+- Development authentication context.
+- Authorization tạo task.
+- Repository và service tạo task.
+- `POST /api/projects/:projectId/tasks`.
+
+Chưa triển khai:
+
+- Session authentication thật.
 - Transaction tạo task và activity log.
+- Integration test cho endpoint.
+- Các endpoint ngoài API tạo task.
