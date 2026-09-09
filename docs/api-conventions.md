@@ -110,7 +110,7 @@ Kiểm tra:
 - Member còn assignment.
 - Optimistic concurrency.
 
-## 8. Contract dự kiến của API tạo task
+## 8. Contract của API tạo task
 
 Endpoint được triển khai lần đầu tại Buổi 10:
 
