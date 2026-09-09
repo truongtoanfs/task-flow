@@ -112,7 +112,7 @@ Kiểm tra:
 
 ## 8. Contract dự kiến của API tạo task
 
-Endpoint sẽ được triển khai ở Buổi 10:
+Endpoint được triển khai lần đầu tại Buổi 10:
 
 ```text
 POST /api/projects/:projectId/tasks
