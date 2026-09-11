@@ -69,11 +69,15 @@ Dự án được sử dụng để thực hành phát triển một ứng dụn
 - Đã triển khai `POST /api/projects/:projectId/tasks`.
 - Đã trả response thành công với HTTP 201.
 - Đã thêm unit test cho authentication context và authorization.
+- Đã tạo activity-log repository.
+- Đã tạo task và activity log trong cùng transaction.
+- Đã khóa membership khi kiểm tra quyền tạo task.
+- Đã xác minh activity log `task_created` tham chiếu đúng task.
+- Đã xác minh rollback không để lại task khi thao tác sau thất bại.
 
 Chưa thực hiện:
 
 - Chưa có session authentication thật.
-- Chưa ghi task và activity log trong cùng transaction.
 - Chưa có integration test tự động cho API.
 - Chưa tạo index tối ưu truy vấn.
 
@@ -520,4 +524,37 @@ Chưa thực hiện:
 
 - Session authentication thật.
 - Transaction tạo task và activity log.
+- Integration test tự động.
+
+## 22. Bằng chứng kiểm tra Buổi 11
+
+File triển khai:
+
+- `server/database/client.ts`
+- `server/repositories/project-member-repository.ts`
+- `server/repositories/task-repository.ts`
+- `server/repositories/activity-log-repository.ts`
+- `server/services/task-service.ts`
+- `server/services/task-service.test.ts`
+- `docs/task-create-api.md`
+
+Đã xác nhận:
+
+- Database và transaction sử dụng chung kiểu executor.
+- Membership được đọc bằng `FOR UPDATE`.
+- Membership check nằm trong transaction.
+- Task được insert trước activity log.
+- Activity log sử dụng action `task_created`.
+- Activity log tham chiếu đúng project, actor và task.
+- Task và activity log được commit cùng nhau.
+- Thao tác lỗi rollback toàn bộ transaction.
+- Rollback test không để lại task.
+- Có 5 test files và 23 test cases.
+- `pnpm test` thành công.
+- `pnpm build` thành công.
+- Không thay đổi schema hoặc migration.
+
+Chưa thực hiện:
+
+- Session authentication thật.
 - Integration test tự động.

@@ -179,10 +179,11 @@ HTTP status thành công: `201 Created`.
 - Authorization tạo task.
 - Repository và service tạo task.
 - `POST /api/projects/:projectId/tasks`.
+- Transaction tạo task và activity log.
+- Row lock membership trong quá trình tạo task.
 
 Chưa triển khai:
 
 - Session authentication thật.
-- Transaction tạo task và activity log.
 - Integration test cho endpoint.
 - Các endpoint ngoài API tạo task.
