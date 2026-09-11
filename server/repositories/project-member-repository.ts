@@ -1,9 +1,9 @@
 import { and, eq } from 'drizzle-orm'
-import type { Database } from '../database/client'
+import type { DatabaseExecutor } from '../database/client'
 import { projectMembers } from '../database/schema'
 
 export async function findProjectMembership(
-  database: Database,
+  database: DatabaseExecutor,
   projectId: string,
   userId: string,
 ) {
@@ -24,7 +24,7 @@ export async function findProjectMembership(
         ),
       ),
     )
-    .limit(1)
+    .limit(1).for('update')
 
   return membership ?? null
 }

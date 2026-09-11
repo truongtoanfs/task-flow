@@ -1,4 +1,4 @@
-import type { Database } from '../database/client'
+import type { DatabaseExecutor } from '../database/client'
 import {
   tasks,
   type NewTask,
@@ -6,7 +6,7 @@ import {
 } from '../database/schema'
 
 export async function insertTask(
-  database: Database,
+  database: DatabaseExecutor,
   task: NewTask,
 ): Promise<Task> {
   const [createdTask] = await database

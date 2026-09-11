@@ -1,9 +1,11 @@
 import type { CreateTaskBody } from '../validation/task'
 import { useDatabase } from '../database/client'
 import type {
+  NewActivityLog,
   ProjectRole,
   Task,
 } from '../database/schema'
+import { insertActivityLog } from '../repositories/activity-log-repository'
 import { findProjectMembership } from '../repositories/project-member-repository'
 import { insertTask } from '../repositories/task-repository'
 import { ApiError } from '../utils/api-error'
@@ -34,25 +36,54 @@ export function assertCanCreateTask(
   }
 }
 
+export function buildTaskCreatedActivityLog(
+  input: {
+    projectId: string
+    actorId: string
+    taskId: string
+  },
+): NewActivityLog {
+  return {
+    projectId: input.projectId,
+    actorId: input.actorId,
+    taskId: input.taskId,
+    action: 'task_created',
+    metadata: {},
+  }
+}
+
 export async function createTask(
   input: CreateTaskInput,
 ): Promise<Task> {
   const database = useDatabase()
 
-  const membership
-    = await findProjectMembership(
-      database,
-      input.projectId,
-      input.actorId,
+  return database.transaction(async (transaction) => {
+    const membership
+      = await findProjectMembership(
+        transaction,
+        input.projectId,
+        input.actorId,
+      )
+
+    assertCanCreateTask(
+      membership?.role ?? null,
     )
 
-  assertCanCreateTask(
-    membership?.role ?? null,
-  )
+    const task = await insertTask(transaction, {
+      projectId: input.projectId,
+      createdBy: input.actorId,
+      ...input.body,
+    })
 
-  return insertTask(database, {
-    projectId: input.projectId,
-    createdBy: input.actorId,
-    ...input.body,
+    await insertActivityLog(
+      transaction,
+      buildTaskCreatedActivityLog({
+        projectId: input.projectId,
+        actorId: input.actorId,
+        taskId: task.id,
+      }),
+    )
+
+    return task
   })
 }

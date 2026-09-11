@@ -26,6 +26,8 @@ Dự án được xây dựng để thực hành phát triển một ứng dụn
 - Đã triển khai authorization tạo task.
 - Đã triển khai `POST /api/projects/:projectId/tasks`.
 - Owner và member được tạo task; viewer bị từ chối.
+- Tạo task và activity log trong cùng transaction.
+- Khóa membership trong quá trình kiểm tra quyền tạo task.
 
 Tài liệu:
 
@@ -41,7 +43,6 @@ Tài liệu:
 Chưa thực hiện:
 
 - Session authentication thật.
-- Transaction tạo task và activity log.
 - Các API ngoài chức năng tạo task.
 - Integration test tự động.
 - Index tối ưu truy vấn.

@@ -1,6 +1,18 @@
 import { describe, expect, it } from 'vitest'
 import { ApiError } from '../utils/api-error'
-import { assertCanCreateTask } from './task-service'
+import {
+  assertCanCreateTask,
+  buildTaskCreatedActivityLog,
+} from './task-service'
+
+const projectId
+  = '20000000-0000-4000-8000-000000000001'
+
+const actorId
+  = '10000000-0000-4000-8000-000000000001'
+
+const taskId
+  = '50000000-0000-4000-8000-000000000001'
 
 describe('assertCanCreateTask', () => {
   it.each(['owner', 'member'] as const)(
@@ -51,5 +63,23 @@ describe('assertCanCreateTask', () => {
       expect(error.code)
         .toBe('RESOURCE_NOT_FOUND')
     }
+  })
+})
+
+describe('buildTaskCreatedActivityLog', () => {
+  it('builds the reference shape required by the database', () => {
+    expect(
+      buildTaskCreatedActivityLog({
+        projectId,
+        actorId,
+        taskId,
+      }),
+    ).toEqual({
+      projectId,
+      actorId,
+      taskId,
+      action: 'task_created',
+      metadata: {},
+    })
   })
 })
